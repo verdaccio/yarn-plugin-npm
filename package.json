@@ -1,15 +1,21 @@
 {
   "private": true,
-  "packageManager": "yarn@4.0.0-rc.26",
+  "version": "0.0.1",
+  "packageManager": "yarn@4.12.0",
   "workspaces": [
     "packages/*",
     "tests/*"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach -v run build"
+    "build": "yarn workspaces foreach -v run build",
+    "ci:version:changeset": "changeset version",
+    "ci:version": "yarn ci:version:changeset && yarn install",
+    "ci:publish": "changeset publish"
   },
   "devDependencies": {
-    "eslint": "latest",
-    "typescript": "^4.8.4"
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.30.0",
+    "eslint": "^10.0.3",
+    "typescript": "^5.9.3"
   }
 }

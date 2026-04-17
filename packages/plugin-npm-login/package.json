@@ -1,12 +1,13 @@
 {
-  "name": "@verdaccio/yarn-plugin-npm-ping",
+  "name": "@verdaccio/yarn-plugin-npm-login",
   "version": "0.0.1",
   "main": "src/index.ts",
   "scripts": {
     "build": "builder build plugin"
   },
   "dependencies": {
-    "clipanion": "^3.2.1"
+    "clipanion": "^3.2.1",
+    "enquirer": "^2.4.1"
   },
   "devDependencies": {
     "@yarnpkg/builder": "^4.2.3",
