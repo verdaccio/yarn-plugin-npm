@@ -42,28 +42,26 @@ function fetch(url: string): Promise<Buffer> {
   });
 }
 
-async function resolveVersion(packageName: string, version?: string): Promise<string> {
+async function resolvePackage(packageName: string, version?: string): Promise<{ version: string; tarballUrl: string }> {
   const url = `${REGISTRY}/${packageName}`;
   const data = JSON.parse((await fetch(url)).toString());
 
-  if (version) {
-    if (!data.versions?.[version]) {
-      throw new Error(`Version ${version} not found for ${packageName}`);
-    }
-    return version;
-  }
-
-  const latest = data["dist-tags"]?.latest;
-  if (!latest) {
+  const resolvedVersion = version ?? data["dist-tags"]?.latest;
+  if (!resolvedVersion) {
     throw new Error(`Could not resolve latest version for ${packageName}`);
   }
-  return latest;
-}
 
-function getTarballUrl(packageName: string, version: string): string {
-  const name = packageName.replace("/", "/-/");
-  const baseName = packageName.split("/").pop();
-  return `${REGISTRY}/${name}/${baseName}-${version}.tgz`;
+  const versionData = data.versions?.[resolvedVersion];
+  if (!versionData) {
+    throw new Error(`Version ${resolvedVersion} not found for ${packageName}`);
+  }
+
+  const tarballUrl = versionData.dist?.tarball;
+  if (!tarballUrl) {
+    throw new Error(`No tarball URL found for ${packageName}@${resolvedVersion}`);
+  }
+
+  return { version: resolvedVersion, tarballUrl };
 }
 
 async function extractBundleFromTarball(tarballUrl: string, bundlePath: string): Promise<string> {
@@ -110,11 +108,10 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const resolvedVersion = await resolveVersion(plugin.package, version);
-  console.log(`Importing ${plugin.package}@${resolvedVersion}...`);
+  const resolved = await resolvePackage(plugin.package, version);
+  console.log(`Importing ${plugin.package}@${resolved.version}...`);
 
-  const tarballUrl = getTarballUrl(plugin.package, resolvedVersion);
-  const bundlePath = await extractBundleFromTarball(tarballUrl, plugin.bundle);
+  const bundlePath = await extractBundleFromTarball(resolved.tarballUrl, plugin.bundle);
 
   try {
     execSync(`yarn plugin import ${bundlePath}`, { stdio: "inherit" });
