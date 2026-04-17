@@ -1,5 +1,11 @@
 # @verdaccio/yarn-import
 
+## 0.0.3
+
+### Patch Changes
+
+- a052773: fix: add more packages
+
 ## 0.0.2
 
 ### Patch Changes
