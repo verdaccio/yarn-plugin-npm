@@ -14,4 +14,5 @@
 # plugins bundle
 
 packages/plugin-npm-ping/bundles/@yarnpkg/plugin-npm-ping.js
+dist/
 node_modules/*

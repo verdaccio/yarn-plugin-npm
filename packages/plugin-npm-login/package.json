@@ -15,6 +15,7 @@
     "@yarnpkg/core": "^4.5.0",
     "@yarnpkg/fslib": "^3.1.4",
     "@yarnpkg/plugin-npm": "^3.4.0",
+    "@yarnpkg/plugin-pack": "^4.0.4",
     "typescript": "^5.9.3"
   }
 }

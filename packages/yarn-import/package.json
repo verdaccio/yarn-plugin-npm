@@ -1,0 +1,22 @@
+{
+  "name": "@verdaccio/yarn-import",
+  "version": "0.0.1",
+  "description": "CLI to easily import Verdaccio Yarn plugins",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "clipanion": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

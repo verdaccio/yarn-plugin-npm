@@ -857,6 +857,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^24.0.0":
+  version: 24.12.2
+  resolution: "@types/node@npm:24.12.2"
+  dependencies:
+    undici-types: "npm:~7.16.0"
+  checksum: 10/99b9f15e67a4b3c39b39ad83ee0febad7f0b4709c004863104d7acfa4146dd7e58c12a08a9a7ff2be8c2eefd0063bf991fade0879d7c4a370a0ee7fd4c799e8a
+  languageName: node
+  linkType: hard
+
 "@types/responselike@npm:*, @types/responselike@npm:^1.0.0":
   version: 1.0.0
   resolution: "@types/responselike@npm:1.0.0"
@@ -1253,6 +1262,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@verdaccio/yarn-import@workspace:packages/yarn-import":
+  version: 0.0.0-use.local
+  resolution: "@verdaccio/yarn-import@workspace:packages/yarn-import"
+  dependencies:
+    "@types/node": "npm:^24.0.0"
+    clipanion: "npm:^3.2.1"
+    typescript: "npm:^5.9.3"
+  bin:
+    yarn-import: ./dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "@verdaccio/yarn-plugin-npm-login@workspace:packages/plugin-npm-login":
   version: 0.0.0-use.local
   resolution: "@verdaccio/yarn-plugin-npm-login@workspace:packages/plugin-npm-login"
@@ -1262,6 +1283,7 @@ __metadata:
     "@yarnpkg/core": "npm:^4.5.0"
     "@yarnpkg/fslib": "npm:^3.1.4"
     "@yarnpkg/plugin-npm": "npm:^3.4.0"
+    "@yarnpkg/plugin-pack": "npm:^4.0.4"
     clipanion: "npm:^3.2.1"
     enquirer: "npm:^2.4.1"
     typescript: "npm:^5.9.3"
@@ -1277,6 +1299,7 @@ __metadata:
     "@yarnpkg/core": "npm:^4.5.0"
     "@yarnpkg/fslib": "npm:^3.1.4"
     "@yarnpkg/plugin-npm": "npm:^3.4.0"
+    "@yarnpkg/plugin-pack": "npm:^4.0.4"
     clipanion: "npm:^3.2.1"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -6194,6 +6217,13 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 10/0097779d94bc0fd26f0418b3a05472410408877279141ded2bd449167be1aed7ea5b76f756562cb3586a07f251b90799bab22d9019ceba49c037c76445f7cddd
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~7.16.0":
+  version: 7.16.0
+  resolution: "undici-types@npm:7.16.0"
+  checksum: 10/db43439f69c2d94cc29f75cbfe9de86df87061d6b0c577ebe9bb3255f49b22c50162a7d7eb413b0458b6510b8ca299ac7cff38c3a29fbd31af9f504bcf7fbc0d
   languageName: node
   linkType: hard
 
