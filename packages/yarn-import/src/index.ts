@@ -24,6 +24,14 @@ const KNOWN_PLUGINS: Record<string, { package: string; bundle: string }> = {
     package: `${SCOPE}/yarn-plugin-npm-unpublish`,
     bundle: "bundles/@yarnpkg/plugin-npm-unpublish.js",
   },
+  "npm-deprecate": {
+    package: `${SCOPE}/yarn-plugin-npm-deprecate`,
+    bundle: "bundles/@yarnpkg/plugin-npm-deprecate.js",
+  },
+  "npm-star": {
+    package: `${SCOPE}/yarn-plugin-npm-star`,
+    bundle: "bundles/@yarnpkg/plugin-npm-star.js",
+  },
 };
 
 function fetch(url: string): Promise<Buffer> {

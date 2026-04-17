@@ -1274,6 +1274,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@verdaccio/yarn-plugin-npm-deprecate@workspace:packages/plugin-npm-deprecate":
+  version: 0.0.0-use.local
+  resolution: "@verdaccio/yarn-plugin-npm-deprecate@workspace:packages/plugin-npm-deprecate"
+  dependencies:
+    "@yarnpkg/builder": "npm:^4.2.3"
+    "@yarnpkg/cli": "npm:^4.12.0"
+    "@yarnpkg/core": "npm:^4.5.0"
+    "@yarnpkg/fslib": "npm:^3.1.4"
+    "@yarnpkg/plugin-npm": "npm:^3.4.0"
+    "@yarnpkg/plugin-pack": "npm:^4.0.4"
+    clipanion: "npm:^3.2.1"
+    typescript: "npm:^5.9.3"
+  languageName: unknown
+  linkType: soft
+
 "@verdaccio/yarn-plugin-npm-login@workspace:packages/plugin-npm-login":
   version: 0.0.0-use.local
   resolution: "@verdaccio/yarn-plugin-npm-login@workspace:packages/plugin-npm-login"
@@ -1293,6 +1308,21 @@ __metadata:
 "@verdaccio/yarn-plugin-npm-ping@workspace:packages/plugin-npm-ping":
   version: 0.0.0-use.local
   resolution: "@verdaccio/yarn-plugin-npm-ping@workspace:packages/plugin-npm-ping"
+  dependencies:
+    "@yarnpkg/builder": "npm:^4.2.3"
+    "@yarnpkg/cli": "npm:^4.12.0"
+    "@yarnpkg/core": "npm:^4.5.0"
+    "@yarnpkg/fslib": "npm:^3.1.4"
+    "@yarnpkg/plugin-npm": "npm:^3.4.0"
+    "@yarnpkg/plugin-pack": "npm:^4.0.4"
+    clipanion: "npm:^3.2.1"
+    typescript: "npm:^5.9.3"
+  languageName: unknown
+  linkType: soft
+
+"@verdaccio/yarn-plugin-npm-star@workspace:packages/plugin-npm-star":
+  version: 0.0.0-use.local
+  resolution: "@verdaccio/yarn-plugin-npm-star@workspace:packages/plugin-npm-star"
   dependencies:
     "@yarnpkg/builder": "npm:^4.2.3"
     "@yarnpkg/cli": "npm:^4.12.0"

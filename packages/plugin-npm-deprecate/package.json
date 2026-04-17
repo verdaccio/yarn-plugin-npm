@@ -1,0 +1,20 @@
+{
+  "name": "@verdaccio/yarn-plugin-npm-deprecate",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "builder build plugin"
+  },
+  "dependencies": {
+    "clipanion": "^3.2.1"
+  },
+  "devDependencies": {
+    "@yarnpkg/builder": "^4.2.3",
+    "@yarnpkg/cli": "^4.12.0",
+    "@yarnpkg/core": "^4.5.0",
+    "@yarnpkg/fslib": "^3.1.4",
+    "@yarnpkg/plugin-npm": "^3.4.0",
+    "@yarnpkg/plugin-pack": "^4.0.4",
+    "typescript": "^5.9.3"
+  }
+}
