@@ -1,0 +1,49 @@
+name: Changesets
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+  push:
+    branches:
+      - master
+
+env:
+  CI: true
+
+jobs:
+  # Update package versions from changesets.
+  version:
+    timeout-minutes: 14
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' && github.repository == 'verdaccio/yarn-plugin-npm'
+    steps:
+      - name: checkout code repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: enable corepack
+        run: corepack enable
+      - name: install dependencies
+        run: yarn install
+      - name: build
+        run: yarn build
+      - name: create versions
+        uses: changesets/action@master
+        with:
+          version: yarn ci:version
+          commit: 'build: release packages'
+          title: 'build: release packages'
+          publish: yarn ci:publish
+          createGithubReleases: true
+          setupGitUser: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.REGISTRY_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_AUTH_TOKEN }}
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
