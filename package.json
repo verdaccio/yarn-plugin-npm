@@ -7,7 +7,7 @@
     "tests/*"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach -v run build",
+    "build": "yarn workspaces foreach -A -v run build",
     "ci:version:changeset": "changeset version",
     "ci:version": "yarn ci:version:changeset && yarn install",
     "ci:publish": "changeset publish"
