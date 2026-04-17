@@ -20,6 +20,10 @@ const KNOWN_PLUGINS: Record<string, { package: string; bundle: string }> = {
     package: `${SCOPE}/yarn-plugin-npm-login`,
     bundle: "bundles/@yarnpkg/plugin-npm-login.js",
   },
+  "npm-unpublish": {
+    package: `${SCOPE}/yarn-plugin-npm-unpublish`,
+    bundle: "bundles/@yarnpkg/plugin-npm-unpublish.js",
+  },
 };
 
 function fetch(url: string): Promise<Buffer> {

@@ -13,6 +13,6 @@
 
 # plugins bundle
 
-packages/plugin-npm-ping/bundles/@yarnpkg/plugin-npm-ping.js
+packages/*/bundles/
 dist/
 node_modules/*
