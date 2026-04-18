@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-login
 
+## 0.0.3
+
+### Patch Changes
+
+- 85205aa: fix: add npm arg flags
+
 ## 0.0.2
 
 ### Patch Changes
