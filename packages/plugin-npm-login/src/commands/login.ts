@@ -56,6 +56,10 @@ export default class LoginCommand extends BaseCommand {
         "Web login without auto-opening the browser",
         "yarn npm login --auth-type=web --no-browser",
       ],
+      [
+        "Non-interactive login (all credentials via flags)",
+        "yarn npm login --auth-type=legacy --user alice --password s3cret --email alice@example.com",
+      ],
     ],
   });
 
@@ -77,6 +81,18 @@ export default class LoginCommand extends BaseCommand {
 
   browser = Option.Boolean(`--browser`, true, {
     description: `Auto-open the login URL in a browser during web login`,
+  });
+
+  username = Option.String(`--user,--username`, {
+    description: `Username for legacy auth. Skips the interactive prompt.`,
+  });
+
+  password = Option.String(`--password`, {
+    description: `Password for legacy auth. Insecure on shared machines — prefer piping via stdin or setting env vars.`,
+  });
+
+  email = Option.String(`--email`, {
+    description: `Email for legacy auth. Skips the interactive prompt.`,
   });
 
   public async execute() {
@@ -133,7 +149,18 @@ export default class LoginCommand extends BaseCommand {
         }
 
         if (!token) {
-          const { username, password, email } = await promptCredentials();
+          if (this.password) {
+            report.reportWarning(
+              MessageName.UNNAMED,
+              `Passing --password on the command line is insecure (shell history, process listings). Prefer stdin or env vars.`
+            );
+          }
+
+          const { username, password, email } = await promptCredentials({
+            username: this.username,
+            password: this.password,
+            email: this.email,
+          });
 
           report.reportInfo(null, `Logging in as ${username}`);
 
@@ -171,14 +198,19 @@ function normalizeRegistry(registry: string) {
   return registry.replace(/\/+$/, ``);
 }
 
-async function promptCredentials() {
-  return prompt<{ username: string; password: string; email: string }>([
+async function promptCredentials(seeds: {
+  username?: string;
+  password?: string;
+  email?: string;
+}): Promise<{ username: string; password: string; email: string }> {
+  const questions = [
     {
       type: `input`,
       name: `username`,
       message: `npm username`,
       validate: (value: string) =>
         value.length > 0 ? true : `Username cannot be empty`,
+      skip: Boolean(seeds.username),
     },
     {
       type: `password`,
@@ -186,6 +218,7 @@ async function promptCredentials() {
       message: `npm password`,
       validate: (value: string) =>
         value.length > 0 ? true : `Password cannot be empty`,
+      skip: Boolean(seeds.password),
     },
     {
       type: `input`,
@@ -193,8 +226,21 @@ async function promptCredentials() {
       message: `npm email (public)`,
       validate: (value: string) =>
         /.+@.+\..+/.test(value) ? true : `Enter a valid email`,
+      skip: Boolean(seeds.email),
     },
-  ]);
+  ].filter((q) => !q.skip);
+
+  const answers = questions.length
+    ? await prompt<{ username?: string; password?: string; email?: string }>(
+        questions
+      )
+    : {};
+
+  return {
+    username: seeds.username ?? answers.username!,
+    password: seeds.password ?? answers.password!,
+    email: seeds.email ?? answers.email!,
+  };
 }
 
 async function webLoginKickoff(
