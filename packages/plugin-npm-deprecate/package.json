@@ -1,6 +1,6 @@
 {
   "name": "@verdaccio/yarn-plugin-npm-deprecate",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Yarn 4 plugin that adds the yarn npm deprecate command",
   "main": "src/index.ts",
   "license": "MIT",
