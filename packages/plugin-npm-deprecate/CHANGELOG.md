@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-deprecate
 
+## 0.0.3
+
+### Patch Changes
+
+- 29d3ed1: chore: update `@verdaccio/yarn-plugin-npm-deprecate`
+
 ## 0.0.2
 
 ### Patch Changes
