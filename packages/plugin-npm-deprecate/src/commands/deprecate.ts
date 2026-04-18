@@ -70,12 +70,6 @@ export default class DeprecateCommand extends BaseCommand {
 
     const { name, versionRange } = parsePackageArg(this.package);
 
-    if (!versionRange) {
-      throw new Error(
-        `A version or version range is required (e.g. my-package@1.0.0 or my-package@">=1.0.0")`
-      );
-    }
-
     const ident = structUtils.parseIdent(name);
     const identUrl = npmHttpUtils.getIdentUrl(ident);
 
@@ -99,15 +93,16 @@ export default class DeprecateCommand extends BaseCommand {
           jsonResponse: true,
         })) as PackageDocument;
 
-        const matchingVersions = resolveVersionRange(
-          Object.keys(doc.versions),
-          versionRange
-        );
+        // No version range means deprecate all versions (same as npm)
+        const allVersions = Object.keys(doc.versions);
+        const matchingVersions = versionRange
+          ? resolveVersionRange(allVersions, versionRange)
+          : allVersions;
 
         if (matchingVersions.length === 0) {
           report.reportError(
             MessageName.UNNAMED,
-            `No versions matched "${versionRange}" in ${name}`
+            `No versions matched "${versionRange ?? "*"}" in ${name}`
           );
           return;
         }
@@ -115,7 +110,7 @@ export default class DeprecateCommand extends BaseCommand {
         const action = this.message ? "Deprecating" : "Un-deprecating";
         report.reportInfo(
           MessageName.UNNAMED,
-          `${action} ${name}@${versionRange} (${matchingVersions.length} version${matchingVersions.length > 1 ? "s" : ""}) on ${registry}`
+          `${action} ${name}${versionRange ? `@${versionRange}` : ""} (${matchingVersions.length} version${matchingVersions.length > 1 ? "s" : ""}) on ${registry}`
         );
 
         for (const version of matchingVersions) {
