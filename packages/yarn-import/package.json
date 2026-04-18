@@ -3,6 +3,26 @@
   "version": "0.0.3",
   "description": "CLI to easily import Verdaccio Yarn plugins",
   "bin": "./dist/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Juan Picado",
+    "email": "juanpicado19@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Juan Picado",
+      "email": "juanpicado19@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/verdaccio/yarn-plugin-npm",
+    "directory": "packages/yarn-import"
+  },
+  "bugs": {
+    "url": "https://github.com/verdaccio/yarn-plugin-npm/issues"
+  },
+  "homepage": "https://github.com/verdaccio/yarn-plugin-npm/tree/master/packages/yarn-import#readme",
   "scripts": {
     "build": "tsc"
   },

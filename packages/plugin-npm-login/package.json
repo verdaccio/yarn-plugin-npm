@@ -1,7 +1,28 @@
 {
   "name": "@verdaccio/yarn-plugin-npm-login",
   "version": "0.0.4",
+  "description": "Yarn 4 plugin that adds the yarn npm login command with web and legacy auth flows",
   "main": "src/index.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Juan Picado",
+    "email": "juanpicado19@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Juan Picado",
+      "email": "juanpicado19@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/verdaccio/yarn-plugin-npm",
+    "directory": "packages/plugin-npm-login"
+  },
+  "bugs": {
+    "url": "https://github.com/verdaccio/yarn-plugin-npm/issues"
+  },
+  "homepage": "https://github.com/verdaccio/yarn-plugin-npm/tree/master/packages/plugin-npm-login#readme",
   "scripts": {
     "build": "builder build plugin"
   },

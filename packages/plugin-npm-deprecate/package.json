@@ -1,7 +1,28 @@
 {
   "name": "@verdaccio/yarn-plugin-npm-deprecate",
   "version": "0.0.4",
+  "description": "Yarn 4 plugin that adds the yarn npm deprecate command",
   "main": "src/index.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Juan Picado",
+    "email": "juanpicado19@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Juan Picado",
+      "email": "juanpicado19@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/verdaccio/yarn-plugin-npm",
+    "directory": "packages/plugin-npm-deprecate"
+  },
+  "bugs": {
+    "url": "https://github.com/verdaccio/yarn-plugin-npm/issues"
+  },
+  "homepage": "https://github.com/verdaccio/yarn-plugin-npm/tree/master/packages/plugin-npm-deprecate#readme",
   "scripts": {
     "build": "builder build plugin"
   },
