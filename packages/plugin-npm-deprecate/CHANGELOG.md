@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-deprecate
 
+## 0.0.4
+
+### Patch Changes
+
+- d4b1066: fix deprecate
+
 ## 0.0.3
 
 ### Patch Changes
