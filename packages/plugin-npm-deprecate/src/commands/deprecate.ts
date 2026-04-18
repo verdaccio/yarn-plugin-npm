@@ -120,10 +120,9 @@ export default class DeprecateCommand extends BaseCommand {
 
         for (const version of matchingVersions) {
           const versionData = doc.versions[version] as VersionData;
-          versionData.deprecated = this.message || undefined;
-          if (!this.message) {
-            delete versionData.deprecated;
-          }
+          // Set deprecated to the message, or empty string to un-deprecate.
+          // npm uses empty string (not delete) so registries recognise the PUT as a deprecate operation.
+          versionData.deprecated = this.message;
         }
 
         // Strip _attachments to prevent the registry from treating this as a publish
