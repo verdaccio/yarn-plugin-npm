@@ -1,6 +1,6 @@
 {
   "name": "@verdaccio/yarn-plugin-npm-star",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yarn 4 plugin that adds the yarn npm star and yarn npm unstar commands",
   "main": "src/index.ts",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "@verdaccio/yarn-plugin-npm-login",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Yarn 4 plugin that adds the yarn npm login command with web and legacy auth flows",
   "main": "src/index.ts",
   "license": "MIT",

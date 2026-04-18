@@ -1,6 +1,6 @@
 {
   "name": "@verdaccio/yarn-plugin-npm-ping",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yarn 4 plugin that adds the yarn npm ping command",
   "main": "src/index.ts",
   "license": "MIT",
