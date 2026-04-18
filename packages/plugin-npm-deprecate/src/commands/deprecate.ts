@@ -126,6 +126,9 @@ export default class DeprecateCommand extends BaseCommand {
           }
         }
 
+        // Strip _attachments to prevent the registry from treating this as a publish
+        delete (doc as any)._attachments;
+
         await npmHttpUtils.put(`${identUrl}`, doc, {
           configuration,
           registry,
