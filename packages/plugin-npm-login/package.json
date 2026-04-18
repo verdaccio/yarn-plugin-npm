@@ -1,6 +1,6 @@
 {
   "name": "@verdaccio/yarn-plugin-npm-login",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "src/index.ts",
   "scripts": {
     "build": "builder build plugin"
