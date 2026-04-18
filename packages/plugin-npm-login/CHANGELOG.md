@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-login
 
+## 0.0.4
+
+### Patch Changes
+
+- cca5c32: fix: improve npm login
+
 ## 0.0.3
 
 ### Patch Changes
