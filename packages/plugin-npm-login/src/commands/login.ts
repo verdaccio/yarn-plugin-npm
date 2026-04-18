@@ -362,7 +362,8 @@ async function legacyLogin({
   configuration,
 }: LegacyLoginOptions): Promise<string | undefined> {
   const userId = `org.couchdb.user:${username}`;
-  const body = {
+  const userPath = `/-/user/${encodeURIComponent(userId)}`;
+  const body: Record<string, unknown> = {
     _id: userId,
     name: username,
     password,
@@ -374,21 +375,76 @@ async function legacyLogin({
 
   const basic = Buffer.from(`${username}:${password}`).toString(`base64`);
 
-  const response = (await npmHttpUtils.put(
-    `/-/user/${encodeURIComponent(userId)}`,
-    body,
-    {
-      configuration,
-      registry,
-      authType: npmHttpUtils.AuthType.NO_AUTH,
-      headers: {
-        authorization: `Basic ${basic}`,
-      },
-      jsonResponse: true,
-    }
-  )) as LegacyLoginResponse;
+  const putOptions = {
+    configuration,
+    registry,
+    authType: npmHttpUtils.AuthType.NO_AUTH,
+    headers: {
+      authorization: `Basic ${basic}`,
+    },
+    jsonResponse: true,
+  };
 
-  return response?.token;
+  try {
+    const response = (await npmHttpUtils.put(
+      userPath,
+      body,
+      putOptions,
+    )) as LegacyLoginResponse;
+
+    return response?.token;
+  } catch (err: unknown) {
+    const statusCode = getHttpStatusCode(err);
+
+    if (statusCode === 409) {
+      // User already exists — fetch the existing doc, merge, and retry
+      // with the _rev field, matching npm adduser behaviour.
+      const existing = (await npmHttpUtils.get(`${userPath}?write=true`, {
+        configuration,
+        registry,
+        authType: npmHttpUtils.AuthType.NO_AUTH,
+        headers: {
+          authorization: `Basic ${basic}`,
+        },
+        jsonResponse: true,
+      })) as Record<string, unknown>;
+
+      const merged = {
+        ...existing,
+        ...body,
+        _rev: existing._rev,
+      };
+
+      const response = (await npmHttpUtils.put(
+        `${userPath}/-rev/${encodeURIComponent(String(existing._rev))}`,
+        merged,
+        {
+          ...putOptions,
+          headers: {
+            authorization: `Basic ${Buffer.from(`${username}:${Buffer.from(password).toString(`base64`)}`).toString(`base64`)}`,
+          },
+        },
+      )) as LegacyLoginResponse;
+
+      return response?.token;
+    }
+
+    throw err;
+  }
+}
+
+function getHttpStatusCode(err: unknown): number | undefined {
+  if (
+    typeof err === `object` &&
+    err !== null &&
+    `originalError` in err
+  ) {
+    const orig = (err as { originalError?: { name?: string; response?: { statusCode?: number } } }).originalError;
+    if (orig?.name === `HTTPError`) {
+      return orig.response?.statusCode;
+    }
+  }
+  return undefined;
 }
 
 async function persistToken({
