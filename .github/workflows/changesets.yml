@@ -19,12 +19,12 @@ jobs:
     if: github.ref == 'refs/heads/master' && github.repository == 'verdaccio/yarn-plugin-npm'
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
       - name: setup node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - name: enable corepack
@@ -34,7 +34,7 @@ jobs:
       - name: build
         run: yarn build
       - name: create versions
-        uses: changesets/action@master
+        uses: changesets/action@63a615b9cd06ba9a3e6d13796c7fbcb080a60a0b
         with:
           version: yarn ci:version
           commit: 'build: release packages'
