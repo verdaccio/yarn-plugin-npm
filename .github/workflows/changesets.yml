@@ -47,6 +47,7 @@ jobs:
           title: 'build: release packages'
           publish: yarn ci:publish
           createGithubReleases: true
+          commitMode: github-api
           setupGitUser: true
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGESET_RELEASE_TOKEN }}
