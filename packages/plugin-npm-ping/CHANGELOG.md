@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-ping
 
+## 0.0.6
+
+### Patch Changes
+
+- dfac9a2: chore: make release
+
 ## 0.0.5
 
 ### Patch Changes
