@@ -1,5 +1,11 @@
 # @verdaccio/yarn-import
 
+## 0.0.7
+
+### Patch Changes
+
+- ad7f789: chore: make release
+
 ## 0.0.6
 
 ### Patch Changes
