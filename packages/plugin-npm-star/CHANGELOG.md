@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-star
 
+## 0.0.4
+
+### Patch Changes
+
+- 0314723: chore: release packages
+
 ## 0.0.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-login
 
+## 0.0.7
+
+### Patch Changes
+
+- 0314723: chore: release packages
+
 ## 0.0.6
 
 ### Patch Changes
