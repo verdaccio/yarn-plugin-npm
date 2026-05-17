@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-unpublish
 
+## 0.0.3
+
+### Patch Changes
+
+- 7366eaa: fix: update deps
+
 ## 0.0.2
 
 ### Patch Changes
