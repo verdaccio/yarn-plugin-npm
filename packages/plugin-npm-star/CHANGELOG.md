@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-star
 
+## 0.0.5
+
+### Patch Changes
+
+- ad7f789: chore: make release
+
 ## 0.0.4
 
 ### Patch Changes

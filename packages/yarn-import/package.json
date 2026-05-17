@@ -1,6 +1,6 @@
 {
   "name": "@verdaccio/yarn-import",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "CLI to easily import Verdaccio Yarn plugins",
   "bin": "./dist/index.js",
   "license": "MIT",

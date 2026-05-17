@@ -1,5 +1,11 @@
 # @local/plugin-test
 
+## 1.0.3
+
+### Patch Changes
+
+- ad7f789: chore: make release
+
 ## 1.0.2
 
 ### Patch Changes
