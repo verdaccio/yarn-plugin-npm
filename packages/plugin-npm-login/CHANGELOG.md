@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-login
 
+## 0.0.6
+
+### Patch Changes
+
+- 7366eaa: fix: update deps
+
 ## 0.0.5
 
 ### Patch Changes
