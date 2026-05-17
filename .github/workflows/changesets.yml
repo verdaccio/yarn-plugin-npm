@@ -8,8 +8,14 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
 env:
   CI: true
+  NPM_CONFIG_PROVENANCE: 'true'
 
 jobs:
   # Update package versions from changesets.
@@ -41,9 +47,7 @@ jobs:
           title: 'build: release packages'
           publish: yarn ci:publish
           createGithubReleases: true
-          setupGitUser: false
+          setupGitUser: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.REGISTRY_AUTH_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_AUTH_TOKEN }}
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org
