@@ -70,7 +70,7 @@ yarn npm ping --scope my-org
 Log in to a registry and store the returned token in `~/.yarnrc.yml`. Supports two authentication flows:
 
 - **web** — opens a browser for SSO/2FA login via `/-/v1/login` (default for registries that support it, e.g. npmjs.org)
-- **legacy** — prompts for username, password, and email, then `PUT`s a CouchDB user document. Handles both user creation and authentication identically to `npm login` / `npm adduser` (including 409 Conflict retry with `_rev`). Works with Verdaccio, Nexus, JFrog, and most self-hosted registries.
+- **legacy** — prompts for username, password, and email, then `PUT`s a CouchDB user document. Creates users on registries that support CouchDB user documents. Existing-user login only works when the registry exposes revision metadata without Basic authentication.
 
 The default `--auth-type=auto` tries web first and falls back to legacy on 404/501.
 
@@ -78,7 +78,7 @@ The default `--auth-type=auto` tries web first and falls back to legacy on 404/5
 # Default (auto: web then legacy fallback)
 yarn npm login
 
-# Force legacy flow (Verdaccio, self-hosted)
+# Force legacy user creation flow (Verdaccio, self-hosted)
 yarn npm login --auth-type=legacy --registry http://localhost:4873
 
 # Log in against a scope's registry
