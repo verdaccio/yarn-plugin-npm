@@ -41,7 +41,7 @@ export default class LoginCommand extends BaseCommand {
 
       - \`web\`: posts to \`/-/v1/login\`, opens the returned URL in a browser, and polls the registry until the token is issued. This is what \`npm login\` uses by default and supports SSO / 2FA.
 
-      - \`legacy\`: prompts for username, password, and email, then \`PUT\`s a CouchDB user document to \`/-/user/org.couchdb.user:<name>\`. The endpoint both creates users and verifies existing ones. Works with Verdaccio and most self-hosted registries.
+      - \`legacy\`: prompts for username, password, and email, then \`PUT\`s a CouchDB user document to \`/-/user/org.couchdb.user:<name>\`. This flow creates users on registries that still support CouchDB user documents. Existing-user login depends on registry support for non-Basic legacy reauthentication.
 
       The default \`--auth-type=auto\` tries web first and falls back to legacy if the registry responds with 404 or 501.
     `,
@@ -373,15 +373,10 @@ async function legacyLogin({
     date: new Date().toISOString(),
   };
 
-  const basic = Buffer.from(`${username}:${password}`).toString(`base64`);
-
   const putOptions = {
     configuration,
     registry,
     authType: npmHttpUtils.AuthType.NO_AUTH,
-    headers: {
-      authorization: `Basic ${basic}`,
-    },
     jsonResponse: true,
   };
 
@@ -398,16 +393,19 @@ async function legacyLogin({
 
     if (statusCode === 409) {
       // User already exists — fetch the existing doc, merge, and retry
-      // with the _rev field, matching npm adduser behaviour.
+      // with the _rev field when the registry exposes it without Basic auth.
       const existing = (await npmHttpUtils.get(`${userPath}?write=true`, {
         configuration,
         registry,
         authType: npmHttpUtils.AuthType.NO_AUTH,
-        headers: {
-          authorization: `Basic ${basic}`,
-        },
         jsonResponse: true,
       })) as Record<string, unknown>;
+
+      if (typeof existing._rev !== `string` || existing._rev.length === 0) {
+        throw new Error(
+          `Legacy login cannot authenticate existing user "${username}" without registry revision metadata`
+        );
+      }
 
       const merged = {
         ...existing,
@@ -418,12 +416,7 @@ async function legacyLogin({
       const response = (await npmHttpUtils.put(
         `${userPath}/-rev/${encodeURIComponent(String(existing._rev))}`,
         merged,
-        {
-          ...putOptions,
-          headers: {
-            authorization: `Basic ${Buffer.from(`${username}:${Buffer.from(password).toString(`base64`)}`).toString(`base64`)}`,
-          },
-        },
+        putOptions,
       )) as LegacyLoginResponse;
 
       return response?.token;

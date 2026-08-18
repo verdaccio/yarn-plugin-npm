@@ -58,12 +58,12 @@ Posts to `/-/v1/login`, opens the returned URL in a browser, and polls the regis
 
 ### Legacy login
 
-Prompts for username, password, and email (or accepts them via CLI flags), then `PUT`s a CouchDB user document to `/-/user/org.couchdb.user:<name>`. This matches the `npm login` / `npm adduser` behaviour:
+Prompts for username, password, and email (or accepts them via CLI flags), then `PUT`s a CouchDB user document to `/-/user/org.couchdb.user:<name>`.
 
 1. **PUT** `/-/user/org.couchdb.user:<name>` — creates the user if the registry allows it and returns a token.
-2. On **409 Conflict** (user already exists) — **GET** `/-/user/org.couchdb.user:<name>?write=true` to fetch the existing doc with its `_rev`, merges the new credentials, then retries with **PUT** `/-/user/org.couchdb.user:<name>/-rev/<rev>`.
+2. On **409 Conflict** (user already exists) — **GET** `/-/user/org.couchdb.user:<name>?write=true` to fetch the existing doc with its `_rev`, merges the new credentials, then retries with **PUT** `/-/user/org.couchdb.user:<name>/-rev/<rev>` when the registry exposes revision metadata without Basic authentication.
 
-Works with Verdaccio, Nexus, JFrog, and most self-hosted registries.
+Works for user creation with Verdaccio, Nexus, JFrog, and most self-hosted registries. Existing-user login depends on registry support for non-Basic legacy reauthentication.
 
 ### Auto (default)
 
