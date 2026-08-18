@@ -1,5 +1,11 @@
 # @verdaccio/yarn-import
 
+## 0.0.8
+
+### Patch Changes
+
+- 7422e6d: chore: trigger release
+
 ## 0.0.7
 
 ### Patch Changes

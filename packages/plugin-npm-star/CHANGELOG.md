@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-star
 
+## 0.0.6
+
+### Patch Changes
+
+- 7422e6d: chore: trigger release
+
 ## 0.0.5
 
 ### Patch Changes

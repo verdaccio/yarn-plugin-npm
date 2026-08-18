@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-ping
 
+## 0.0.7
+
+### Patch Changes
+
+- 7422e6d: chore: trigger release
+
 ## 0.0.6
 
 ### Patch Changes

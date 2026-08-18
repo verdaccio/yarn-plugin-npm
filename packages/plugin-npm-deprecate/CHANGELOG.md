@@ -1,5 +1,11 @@
 # @verdaccio/yarn-plugin-npm-deprecate
 
+## 0.0.9
+
+### Patch Changes
+
+- 7422e6d: chore: trigger release
+
 ## 0.0.8
 
 ### Patch Changes
