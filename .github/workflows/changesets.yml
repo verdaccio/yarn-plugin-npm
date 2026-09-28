@@ -12,7 +12,7 @@ permissions:
 
 env:
   CI: true
-  YARN_NPM_PUBLISH_PROVENANCE: 'true'
+  NPM_CONFIG_PROVENANCE: 'true'
 
 jobs:
   # Open or update the version PR on every push to master.
@@ -78,4 +78,4 @@ jobs:
           publish-script: yarn ci:publish
           create-github-releases: true
         env:
-          YARN_NPM_REGISTRY_SERVER: https://registry.npmjs.org
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
